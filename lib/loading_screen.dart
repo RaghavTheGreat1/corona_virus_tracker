@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
+import 'fetch_data.dart';
 import 'home_page.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import '404.dart';
 
-int confirmedCases;
-int deaths;
-int recovered;
-int active;
+
 bool result;
-String lastUpdated;
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -23,15 +18,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void getDataIndia() async {
     result = await DataConnectionChecker().hasConnection;
     if (result == true) {
-      Response response;
-      response = await get('https://covid-19india-api.herokuapp.com/v2.0/country_data');
-      List data = jsonDecode(response.body);
-      confirmedCases = data[1]['confirmed_cases'];
-      deaths = data[1]['death_cases'];
-      recovered = data[1]['recovered_cases'];
-      active = data[1]['active_cases'];
-      lastUpdated = data[1]['last_updated'];
-      print(confirmedCases);
+      await FetchData().fetchCountryData();
       Navigator.push(
         context,
         MaterialPageRoute(
