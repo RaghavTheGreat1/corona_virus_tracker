@@ -12,6 +12,7 @@ int deaths;
 int recovered;
 int active;
 bool result;
+String lastUpdated;
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -23,12 +24,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
     result = await DataConnectionChecker().hasConnection;
     if (result == true) {
       Response response;
-      response = await get('https://api.covid19api.com/dayone/country/india');
+      response = await get('https://covid-19india-api.herokuapp.com/v2.0/country_data');
       List data = jsonDecode(response.body);
-      confirmedCases = data[data.length - 1]['Confirmed'];
-      deaths = data[data.length - 1]['Deaths'];
-      recovered = data[data.length - 1]['Recovered'];
-      active = data[data.length - 1]['Active'];
+      confirmedCases = data[1]['confirmed_cases'];
+      deaths = data[1]['death_cases'];
+      recovered = data[1]['recovered_cases'];
+      active = data[1]['active_cases'];
+      lastUpdated = data[1]['last_updated'];
       print(confirmedCases);
       Navigator.push(
         context,
