@@ -5,13 +5,11 @@ class Card extends StatelessWidget {
   final CardText cardHeading;
   final CardText casesNumber;
   final int cardColor;
-  final int borderColor;
   const Card(
       {@required this.screenWidth,
       @required this.cardHeading,
       @required this.casesNumber,
-      @required this.cardColor,
-      this.borderColor});
+      @required this.cardColor,});
 
   final double screenWidth;
 
@@ -34,11 +32,6 @@ class Card extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: Color(cardColor),
-        border: Border.all(
-          color: Color(
-            borderColor == null ? 0xFF000000 : borderColor,
-          ),
-        ),
         borderRadius: BorderRadius.circular(15),
       ),
     );

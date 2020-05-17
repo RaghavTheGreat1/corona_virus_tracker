@@ -27,12 +27,12 @@ class _HomePageState extends State<HomePage> {
       home: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: CardText('India'),
+            backgroundColor: Color(0xFF00adb5),
+            title: CardText('🇮🇳    India    🇮🇳', color: 0xFFfcfefe, fontWeight: FontWeight.w700,),
             centerTitle: true,
           ),
-          backgroundColor: Color(0xFF202124),
+          backgroundColor: Color(0xFFeeeeee),
           body: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                           cardHeading: CardText('Confirmed Cases'),
                           casesNumber:
                               CardText(widget.confirmedCases.toString()),
-                          cardColor: 0xFF0E385D,
+                          cardColor: 0xFFfda403,
                         ),
                         SizedBox(
                           height: 8,
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                             casesNumber: CardText(
                               widget.active.toString(),
                             ),
-                            cardColor: 0xFFD21F3C)
+                            cardColor: 0xFFf73859)
                       ],
                     ),
                   ),
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                             casesNumber: CardText(
                               widget.recovered.toString(),
                             ),
-                            cardColor: 0xFF24BFA5),
+                            cardColor: 0xFF1fab89),
                         SizedBox(
                           height: 8,
                         ),
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                           casesNumber: CardText(
                             widget.deaths.toString(),
                           ),
-                          cardColor: 0xFF1D1D1D,
+                          cardColor: 0xFF233142,
                         ),
                       ],
                     ),
