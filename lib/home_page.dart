@@ -1,3 +1,4 @@
+import 'package:corona_virus_tracker/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -66,28 +67,14 @@ class _HomePageState extends State<HomePage> {
                         width: screenWidth / 2.5,
                         child: Column(
                           children: <Widget>[
-                            Text(
-                              "Total Cases",
-                              style: GoogleFonts.openSans(
-                                textStyle: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
+                            CardText(
+                              'CONFIRMED CASES',
                             ),
                             SizedBox(
                               height: 30,
                             ),
-                            Text(
-                              widget.confirmedCases.toString(),
-                              style: GoogleFonts.openSans(
-                                textStyle: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
+                            CardText(
+                              confirmedCases.toString(),
                             ),
                           ],
                         ),
@@ -153,28 +140,12 @@ class _HomePageState extends State<HomePage> {
                         width: screenWidth / 2.5,
                         child: Column(
                           children: <Widget>[
-                            Text(
-                              "Recovered",
-                              style: GoogleFonts.openSans(
-                                textStyle: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
-                            ),
+                            CardText("Recovered"),
                             SizedBox(
                               height: 30,
                             ),
-                            Text(
+                            CardText(
                               widget.recovered.toString(),
-                              style: GoogleFonts.openSans(
-                                textStyle: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
                             ),
                           ],
                         ),
@@ -194,28 +165,14 @@ class _HomePageState extends State<HomePage> {
                         width: screenWidth / 2.5,
                         child: Column(
                           children: <Widget>[
-                            Text(
+                            CardText(
                               "Deaths",
-                              style: GoogleFonts.openSans(
-                                textStyle: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
                             ),
                             SizedBox(
                               height: 30,
                             ),
-                            Text(
+                            CardText(
                               widget.deaths.toString(),
-                              style: GoogleFonts.openSans(
-                                textStyle: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
                             ),
                           ],
                         ),
@@ -233,6 +190,33 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CardText extends StatelessWidget {
+  final String data;
+  final int color;
+  final int fontSize;
+  final FontWeight fontWeight;
+  const CardText(
+    this.data, {
+    this.color,
+    this.fontSize,
+    this.fontWeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      data,
+      style: GoogleFonts.openSans(
+        textStyle: TextStyle(
+          fontSize: fontSize == null ? 20 : fontSize,
+          fontWeight: fontWeight == null ? FontWeight.w400 : fontWeight,
+          color: Color(color == null ? 0xFFFFFFFF : color),
         ),
       ),
     );
