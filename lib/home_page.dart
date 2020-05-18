@@ -1,7 +1,10 @@
+import 'package:corona_virus_tracker/themes.dart';
 import 'package:flutter/material.dart';
 import 'cardText.dart';
 import 'card.dart' as card;
 import 'regional_data.dart';
+import 'fetch_data.dart';
+import 'themes.dart';
 
 class HomePage extends StatefulWidget {
   final int deaths;
@@ -20,6 +23,12 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+themeChanger() {
+  scaffoldBGColor == themeColors["white"]
+      ? scaffoldBGColor = themeColors["dark"]
+      : scaffoldBGColor = themeColors["white"];
+}
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -27,6 +36,22 @@ class _HomePageState extends State<HomePage> {
     List<Widget> listOfCards = [
       Column(
         children: <Widget>[
+          Container(
+            height: 50,
+            width: double.infinity,
+            child: Center(
+              child: CardText(
+                '$lastUpdated',
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: Color(0xFF010a43),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10)),
+            ),
+          ),
+          SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -113,12 +138,24 @@ class _HomePageState extends State<HomePage> {
             height: 50,
             width: 50,
             child: Center(
-              child: CardText(
-                'State-Wise Data',
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CardText(
+                    'State-Wise Data',
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                  ),
+                ],
               ),
             ),
             decoration: BoxDecoration(
-              color: Color(0xFF000000),
+              color: Color(0xFFf34573),
               borderRadius: BorderRadius.circular(15),
             ),
           ),
@@ -127,18 +164,33 @@ class _HomePageState extends State<HomePage> {
     ];
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xFF00adb5),
+            backgroundColor: Color(0xFFff0b55),
             title: CardText(
               '🇮🇳    India    🇮🇳',
               color: 0xFFfcfefe,
               fontWeight: FontWeight.w700,
             ),
             centerTitle: true,
+            actions: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    themeChanger();
+                  });
+                  
+                },
+                child: Icon(
+                  Icons.wb_sunny,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
-          backgroundColor: Color(0xFFeeeeee),
+          backgroundColor: scaffoldBGColor,
           body: ListView(
             children: listOfCards,
           ),

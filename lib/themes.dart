@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
-  main() async {
-  List<Color> colorsss = [
+Map<String, Color> themeColors = {
+  'light': Color(0xFFeeeeee),
+  'dark': Color(0xFF3f3f44),
+};
+
+Color scaffoldBGColor = themeColors["white"]; 
+
+List<Color> colors = [
     Color(0xFFea728c),
     Color(0xFFffa41b),
     Color(0xFFff1e56),
@@ -28,11 +34,21 @@ import 'package:flutter/material.dart';
     Color(0xFF111d5e),
     Color(0xFFd45079),
     Color(0xFFc70d3a),
-    Color(0xFF323232),
-    Color(0xFF323232),
     Color(0xFF6d3580),
-    Color(0xFF6d3580),
+    Color(0xFF018383),
     Color(0xFFe61c5d),
+    Color(0xFF9a1f40),
+    Color(0xFFf67280),
+    Color(0xFFf0134d),
+    Color(0xFFb5525c),
+    Color(0xFFf57b51),
+    Color(0xFF142850),
+    Color(0xFFfe9801),
+    Color(0xFFff9776),
+    Color(0xFF018383),
+    Color(0xFF21243d),
+    Color(0xFFce0f3d),
+    Color(0xFFfd5e53),
+    Color(0xFFf0134d),
+    Color(0xFFf0134d),
   ];
-  print(colorsss.length);
-}
