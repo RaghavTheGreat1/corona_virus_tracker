@@ -6,8 +6,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import '404.dart';
 
-
+double screenWidth;
 bool result;
+List fetchedStateData;
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     result = await DataConnectionChecker().hasConnection;
     if (result == true) {
       await FetchData().fetchCountryData();
+      fetchedStateData = await FetchData().fetchDataByState();
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -44,6 +46,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Color(0xFF202124),
         body: Column(

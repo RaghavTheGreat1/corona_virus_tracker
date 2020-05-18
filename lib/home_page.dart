@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'cardText.dart';
 import 'card.dart' as card;
-import 'regionalData.dart';
+import 'regional_data.dart';
 
 class HomePage extends StatefulWidget {
   final int deaths;
@@ -96,10 +96,19 @@ class _HomePageState extends State<HomePage> {
       GestureDetector(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => RegionalData()));
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return RegionalData();
+              },
+            ),
+          );
         },
         child: Padding(
-          padding: const EdgeInsets.only(left: 50.0, right: 50.0,),
+          padding: const EdgeInsets.only(
+            left: 50.0,
+            right: 50.0,
+          ),
           child: Container(
             height: 50,
             width: 50,
