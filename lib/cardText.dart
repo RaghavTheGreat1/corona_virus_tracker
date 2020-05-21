@@ -4,13 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class CardText extends StatelessWidget {
   final String data;
   final int color;
-  final int fontSize;
+  final double fontSize;
   final FontWeight fontWeight;
   const CardText(
     this.data, {
-    this.color,
-    this.fontSize,
-    this.fontWeight,
+    this.color = 0xFFFFFFFF,
+    this.fontSize = 20,
+    this.fontWeight = FontWeight.w400,
   });
 
   @override
@@ -19,9 +19,9 @@ class CardText extends StatelessWidget {
       data,
       style: GoogleFonts.openSans(
         textStyle: TextStyle(
-          fontSize: fontSize == null ? 20 : fontSize,
-          fontWeight: fontWeight == null ? FontWeight.w400 : fontWeight,
-          color: Color(color == null ? 0xFFFFFFFF : color),
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+          color: Color(color),
         ),
       ),
     );

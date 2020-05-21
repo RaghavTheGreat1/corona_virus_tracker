@@ -7,8 +7,6 @@ int recovered;
 int active;
 String lastUpdated;
 
-
-
 class FetchData {
   Future fetchCountryData() async {
     Response response;

@@ -162,37 +162,59 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     ];
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Color(0xFFff0b55),
-            title: CardText(
-              '🇮🇳    India    🇮🇳',
-              color: 0xFFfcfefe,
-              fontWeight: FontWeight.w700,
-            ),
-            centerTitle: true,
-            actions: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    themeChanger();
-                  });
-                  
-                },
-                child: Icon(
-                  Icons.wb_sunny,
-                  color: Colors.white,
-                ),
+  Future<bool> _onBackPressed() {
+  return showDialog(
+    context: context,
+    builder: (context) => new AlertDialog(
+      title: new Text('Are you sure?'),
+      content: new Text('Do you want to exit an App'),
+      actions: <Widget>[
+        new GestureDetector(
+          onTap: () => Navigator.of(context).pop(false),
+          child: Text("NO"),
+        ),
+        SizedBox(height: 16),
+        new GestureDetector(
+          onTap: () => Navigator.of(context).pop(true),
+          child: Text("YES"),
+        ),
+      ],
+    ),
+  ) ??
+      false;
+}
+    return WillPopScope(
+        onWillPop: _onBackPressed,
+          child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Color(0xFFff0b55),
+              title: CardText(
+                '🇮🇳    India    🇮🇳',
+                color: 0xFFfcfefe,
+                fontWeight: FontWeight.w700,
               ),
-            ],
-          ),
-          backgroundColor: scaffoldBGColor,
-          body: ListView(
-            children: listOfCards,
+              centerTitle: true,
+              actions: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      themeChanger();
+                    });
+                  },
+                  child: Icon(
+                    Icons.wb_sunny,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            backgroundColor: scaffoldBGColor,
+            body: ListView(
+              children: listOfCards,
+            ),
           ),
         ),
       ),
