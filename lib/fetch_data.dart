@@ -9,32 +9,37 @@ String lastUpdated;
 
 class FetchData {
   Future fetchCountryData() async {
-    Response response;
-    response =
-        await get('https://covid-19india-api.herokuapp.com/v2.0/country_data');
-    List data = jsonDecode(response.body);
-    confirmedCases = data[1]['confirmed_cases'];
-    deaths = data[1]['death_cases'];
-    recovered = data[1]['recovered_cases'];
-    active = data[1]['active_cases'];
-    lastUpdated = data[1]['last_updated'];
+    Future<int> dataFetcher(String caseType) async {
+      Response response;
+      response = await get(
+          'https://api.covid19api.com/dayone/country/india/status/$caseType');
+      List data = jsonDecode(response.body);
+      lastUpdated = data[data.length - 1]['Date'];
+      return data[data.length - 1]['Cases'];
+    }
+
+    confirmedCases = await dataFetcher("confirmed");
+    print(confirmedCases);
+    deaths = await dataFetcher("deaths");
+    recovered = await dataFetcher("recovered");
+    active = confirmedCases - (recovered + deaths);
   }
 
   Future<List> fetchDataByState() async {
     List<Map> stateData = [];
     Response response;
     response =
-        await get('https://covid-19india-api.herokuapp.com/v2.0/state_data');
+        await get('https://api.covid19api.com/live/country/india/status/confirmed/date/2021-04-23T00:00:00Z#');
     List data = jsonDecode(response.body);
-    for (int i = 0; i < data[1]["state_data"].length; i++) {
-      stateData.add({
-        'state': data[1]['state_data'][i]['state'].toString(),
-        'confirmed': data[1]['state_data'][i]['confirmed'].toString(),
-        'deaths': data[1]['state_data'][i]['deaths'].toString(),
-        'recovered': data[1]['state_data'][i]['recovered'].toString(),
-        'active': data[1]['state_data'][i]['active'].toString(),
-      });
 
+    for (int i = data.length - 1; i >= data.length - 36 ; i--) {
+      stateData.add({
+        'state': data[i]['Province'].toString(),
+        'confirmed': data[i]['Confirmed'].toString(),
+        'deaths': data[i]['Deaths'].toString(),
+        'recovered': data[i]['Recovered'].toString(),
+        'active': data[i]['Active'].toString(),
+      });
     }
     return stateData;
   }
