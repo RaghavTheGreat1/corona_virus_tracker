@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'cardText.dart';
 import 'loading_screen.dart';
 import 'themes.dart';
@@ -10,74 +11,105 @@ class RegionalData extends StatefulWidget {
 
 stateCardGenerator() {
   List<Widget> stateCardList = [];
-  
+
   for (int i = 0; i < fetchedStateData.length; i++) {
     stateCardList.add(
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 50,
-          child: Center(
-              child: CardText(
-            fetchedStateData[i]['state'],
-          )),
-          decoration: BoxDecoration(
-            color: colors[i],
+        child: Card(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Colors.black,
+              width: 2.0,
+            ),
             borderRadius: BorderRadius.circular(15),
           ),
-        ),
-      ),
-    );
-    stateCardList.add(
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 150,
-          width: screenWidth,
-          decoration: BoxDecoration(
-            color: colors[i],
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CardText('Conirmed: '),
-                      CardText(fetchedStateData[i]['confirmed']),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      CardText('Active: '),
-                      CardText(fetchedStateData[i]['active']),
-                    ],
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      CardText('Recovered: '),
-                      CardText(fetchedStateData[i]['recovered']),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      CardText('Deaths: '),
-                      CardText(fetchedStateData[i]['deaths']),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+          child: Container(
+            height: 150,
+            width: screenWidth,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CardText(
+                      fetchedStateData[i]['state'],
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CardText(
+                          'Confirmed: ',
+                          fontWeight: FontWeight.w600,
+                        ),
+                        CardText(
+                          fetchedStateData[i]['confirmed'],
+                          color: Colors.deepOrangeAccent,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        CardText(
+                          'Active: ',
+                          fontWeight: FontWeight.w600,
+                        ),
+                        CardText(
+                          fetchedStateData[i]['active'],
+                          color: Colors.redAccent,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        CardText(
+                          'Recovered: ',
+                          fontWeight: FontWeight.w600,
+                        ),
+                        CardText(
+                          fetchedStateData[i]['recovered'],
+                          color: Colors.green,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        CardText(
+                          'Deaths: ',
+                          fontWeight: FontWeight.w600,
+                        ),
+                        CardText(
+                          fetchedStateData[i]['deaths'],
+                          fontWeight: FontWeight.w600,
+                          color: Colors.blueGrey,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -91,12 +123,16 @@ class _RegionalDataState extends State<RegionalData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
-        backgroundColor: Color(0xFFff0b55),
-        title: CardText(
-          '🇮🇳    India    🇮🇳',
-          color: 0xFFfcfefe,
-          fontWeight: FontWeight.w700,
+        backgroundColor: Colors.white,
+        leading: BackButton(
+          color: Colors.black,
+        ),
+        title: Text(
+          "Statewise Data",
+          style: GoogleFonts.openSans(
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
         ),
         centerTitle: true,
       ),

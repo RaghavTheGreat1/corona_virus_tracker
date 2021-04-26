@@ -1,5 +1,6 @@
 import 'package:corona_virus_tracker/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'cardText.dart';
 import 'card.dart' as card;
 import 'regional_data.dart';
@@ -23,12 +24,6 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-themeChanger() {
-  scaffoldBGColor == themeColors["white"]
-      ? scaffoldBGColor = themeColors["dark"]
-      : scaffoldBGColor = themeColors["white"];
-}
-
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -42,6 +37,7 @@ class _HomePageState extends State<HomePage> {
             child: Center(
               child: CardText(
                 '$lastUpdated',
+                color: Colors.white,
               ),
             ),
             decoration: BoxDecoration(
@@ -62,8 +58,14 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     card.Card(
                       screenWidth: screenWidth,
-                      cardHeading: CardText('Confirmed'),
-                      casesNumber: CardText(widget.confirmedCases.toString()),
+                      cardHeading: CardText(
+                        'Confirmed',
+                        color: Colors.white,
+                      ),
+                      casesNumber: CardText(
+                        widget.confirmedCases.toString(),
+                        color: Colors.white,
+                      ),
                       cardColor: 0xFFfda403,
                     ),
                     SizedBox(
@@ -73,9 +75,11 @@ class _HomePageState extends State<HomePage> {
                         screenWidth: screenWidth,
                         cardHeading: CardText(
                           "Active",
+                          color: Colors.white,
                         ),
                         casesNumber: CardText(
                           widget.active.toString(),
+                          color: Colors.white,
                         ),
                         cardColor: 0xFFf73859)
                   ],
@@ -90,9 +94,11 @@ class _HomePageState extends State<HomePage> {
                         screenWidth: screenWidth,
                         cardHeading: CardText(
                           "Recovered",
+                          color: Colors.white,
                         ),
                         casesNumber: CardText(
                           widget.recovered.toString(),
+                          color: Colors.white,
                         ),
                         cardColor: 0xFF1fab89),
                     SizedBox(
@@ -102,9 +108,11 @@ class _HomePageState extends State<HomePage> {
                       screenWidth: screenWidth,
                       cardHeading: CardText(
                         "Deaths",
+                        color: Colors.white,
                       ),
                       casesNumber: CardText(
                         widget.deaths.toString(),
+                        color: Colors.white,
                       ),
                       cardColor: 0xFF233142,
                     ),
@@ -143,6 +151,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   CardText(
                     'State-Wise Data',
+                    color: Colors.white,
                   ),
                   SizedBox(
                     width: 10,
@@ -162,54 +171,44 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     ];
-  Future<bool> _onBackPressed() {
-  return showDialog(
-    context: context,
-    builder: (context) => new AlertDialog(
-      title: new Text('Are you sure?'),
-      content: new Text('Do you want to exit an App'),
-      actions: <Widget>[
-        new GestureDetector(
-          onTap: () => Navigator.of(context).pop(false),
-          child: Text("NO"),
-        ),
-        SizedBox(height: 16),
-        new GestureDetector(
-          onTap: () => Navigator.of(context).pop(true),
-          child: Text("YES"),
-        ),
-      ],
-    ),
-  ) ??
-      false;
-}
+    Future<bool> _onBackPressed() {
+      return showDialog(
+            context: context,
+            builder: (context) => new AlertDialog(
+              title: new Text('Are you sure?'),
+              content: new Text('Do you want to exit an App'),
+              actions: <Widget>[
+                new GestureDetector(
+                  onTap: () => Navigator.of(context).pop(false),
+                  child: Text("NO"),
+                ),
+                SizedBox(height: 16),
+                new GestureDetector(
+                  onTap: () => Navigator.of(context).pop(true),
+                  child: Text("YES"),
+                ),
+              ],
+            ),
+          ) ??
+          false;
+    }
+
     return WillPopScope(
-        onWillPop: _onBackPressed,
-          child: MaterialApp(
+      onWillPop: _onBackPressed,
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Color(0xFFff0b55),
-              title: CardText(
-                '🇮🇳    India    🇮🇳',
-                color: 0xFFfcfefe,
-                fontWeight: FontWeight.w700,
+              backgroundColor: Colors.white,
+              title: Text(
+                "Coronavirus Tracker",
+                style: GoogleFonts.openSans(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
               ),
               centerTitle: true,
-              actions: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      themeChanger();
-                    });
-                  },
-                  child: Icon(
-                    Icons.wb_sunny,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
             ),
             backgroundColor: scaffoldBGColor,
             body: ListView(
